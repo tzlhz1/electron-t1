@@ -4,14 +4,15 @@ const Timer = require('timer.js')
 
 function startMork(){
     let workTime = new Timer({
-        ontick:()=>{
-            updateTime()
+        ontick:(ms)=>{
+            console.log(ms)
+            updateTime(ms)
         },
         onend:()=>{
             notification()
         }
     })
-    workTime.start(10)
+    workTime.start(3)
 }
 function updateTime(ms){
     let timerContainer = document.querySelector('#timer-container');
