@@ -5,7 +5,6 @@ const Timer = require('timer.js')
 function startMork(){
     let workTime = new Timer({
         ontick:(ms)=>{
-            console.log(ms)
             updateTime(ms)
         },
         onend:()=>{
@@ -16,7 +15,9 @@ function startMork(){
 }
 function updateTime(ms){
     let timerContainer = document.querySelector('#timer-container');
-    timerContainer.innerText = ms
+    let s = (ms/1000).toFixed(0)
+    let ss = (s/60).toFixed(0)
+    timerContainer.innerText = `${ss.toString().padStart(2,0)} : ${s.toString().padStart(2,0)}`
 }
 
 async function notification(){
