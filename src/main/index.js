@@ -1,4 +1,5 @@
 import console from 'console'
+import './tray'
 import { app, BrowserWindow ,Tray} from 'electron' // 引入 app 和 BrowserWindow
 import {options} from './windowList'
 /**
@@ -9,7 +10,7 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
   
 }
-console.log('dev---->',`${__static}`)
+
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
@@ -45,28 +46,3 @@ app.on('activate', () => {
     createWindow()
   }
 }) // 当进程处于活动状态时触发
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install `electron-updater` to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */
-
-let tray = null
-app.whenReady().then(() => {
-  tray = new Tray(`${__static}/menubar.png`) // ${__static} 当前static 路径
-})
